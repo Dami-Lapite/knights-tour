@@ -1,0 +1,38 @@
+.visitedSquare{
+    width: 90px;
+    height: 90px;
+    border: 1;
+    border-style: solid;
+    background-color: rgb(182, 181, 181);
+    border-color: rgb(238, 189, 116);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.blackSquare{
+    width: 90px;
+    height: 90px;
+    border: 1;
+    border-style: solid;
+    background-color: rgb(105, 72, 0);
+    border-color: rgb(105, 72, 0);    
+}
+
+.whiteSquare{
+    width: 90px;
+    height: 90px;
+    border: 1;
+    border-style: solid;
+    background-color: rgb(238, 189, 116);
+    border-color: rgb(239, 189, 116);    
+}
+
+.legalSquare{
+    width: 90px;
+    height: 90px;
+    border: 1;
+    border-style: solid;
+    background-color: rgb(176, 231, 159);
+    border-color: rgb(176, 231, 159)  
+}
