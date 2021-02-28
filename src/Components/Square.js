@@ -3,6 +3,9 @@ import styles from '../Styles/square.module.css';
 import ImSrc from '../Images/chessKnight.png'
 
 export class Square extends Component {
+
+    // Function: handles square clicks
+    // Uses setCurrentSquare in App.js as call back function
     clickhandler = () =>{
         this.props.parentCallBack(this.props.squareData.id);
     }

@@ -1,5 +1,7 @@
 import generateLegalIds from './generateLegalIds';
 
+// Function: Returns count of unvisited neighbours
+// Used by: getKnightTour
 function getAvailability(id,visited) {
     let neighbours = generateLegalIds(id);
     let availability = 0;

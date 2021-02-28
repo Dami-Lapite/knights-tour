@@ -1,3 +1,5 @@
+// The Knight's Tour by Dami Lapite, Feb 2021
+
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -16,23 +18,30 @@ class App extends Component {
       isLoaded: false,
       squares: [],
       currentSquareId: "",
-      knightPathPos: 1,
-      knightPath: []
+      knightPathPos: 1
     };
   }
 
+  // Function: Checks if the first move is yet to be made
+  // Used by: Square component to make all squares clickable
   isFirstMove = () => {
     return(this.state.currentSquareId == "");
   }
 
+  // Function: Checks if a starting square has been selected
+  // Used by: Computer Mode Button to toggle disabled state
   isSecondMove = () =>{
     return(this.state.knightPathPos == 2);
   }
 
+  // Function: Checks if knight is on the square with squareID 
+  // Used by: Square component to display knight image
   isCurrentSquare = (squareID) =>{
     return(squareID == this.state.currentSquareId);
   }
 
+  // Function: Completes the knight's tour once a starting square is selected
+  // Used by: Computer Mode Button when clicked
   computerMode = () =>{
     let path = [];
     let visited = new Array(64); 
@@ -48,16 +57,22 @@ class App extends Component {
     this.setState({currentSquareId: tour[63], knightPathPos: 65});
   }
 
+  // Function: Marks a square as visited, and assigns its position in the tour.
+  // Used by: computerMode() to display tour on board
   completePath = (squareID,count) =>{
     let currentSquare = this.state.squares.find(currentSquare => currentSquare.id == squareID);
     currentSquare.visited = true;
     currentSquare.pathPos = count;
   }
 
+  // Function: Checks if path is Complete i.e. all 64 sqaures have been visited
+  // Used by: Card component to display completion message
   isPathComplete = () =>{
     return(this.state.knightPathPos > 64);
   }
 
+  // Function: Checks if there are any legal and unvisited moves based on knight's current position
+  // Used by: Card component to display trapped message
   anyLegalMoves = () =>{
     if (this.state.currentSquareId != ""){
       let legalMoves = generateLegalMoves(this.state.currentSquareId);
@@ -76,6 +91,8 @@ class App extends Component {
     }
   }
 
+  // Function: Sets knight on square with currentId
+  // Used by: Square component as a call back function when clicked
   setCurrentSquare = (currentId) =>{
     this.setState({currentSquareId: currentId});
     let currentSquare = this.state.squares.find(currentSquare => currentSquare.id == currentId);
@@ -85,10 +102,14 @@ class App extends Component {
     this.setState({knightPathPos: temp});
   }
 
+  // Function: Restarts the game
+  // Used by: Start Again Button when clicked
   reloadPage = () =>{
     window.location.reload();
   }
 
+  // Function: Loads board as array of square objects
+  // Used for : Rendering squares ans setting initial state
   componentDidMount(){
     fetch("./boardData.json")
       .then(res => res.json())

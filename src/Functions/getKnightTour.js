@@ -1,6 +1,8 @@
 import generateLegalIds from './generateLegalIds';
 import getAvailability from './getAvailability'
 
+// Function: Uses depth-first search recursively to find complete path
+// Used by: App.js Computer Mode
 function getKnightTour(currentId,path,visited) {
     let currentCoordinate = currentId.split("");
     let i = +currentCoordinate[0];

@@ -1,3 +1,5 @@
+// Function: Checks if a square is a legal move from current knight position
+// Used by: App.js
 function isLegalMove(i,j,currentId) {
     const moveOffsets = [{"x":-1,"y":-2},{"x":-1,"y":2},{"x":1,"y":-2},{"x":-2,"y":-1},{"x":-2,"y":1},{"x":2,"y":-1},{"x":1,"y":2},{"x":2,"y":1}]
     let currentCoordinate = currentId.split("");

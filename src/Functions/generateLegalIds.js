@@ -1,5 +1,7 @@
 import isOnBoard from './isOnBoard';
 
+// Function:Genereate array of id objects of squares that are legal moves from current square
+// Used by: getKnightTour, getAvailability
 function generateLegalIds(currentId) {
     const moveOffsets = [{"x":-1,"y":-2},{"x":-1,"y":2},{"x":1,"y":-2},{"x":-2,"y":-1},{"x":-2,"y":1},{"x":2,"y":-1},{"x":1,"y":2},{"x":2,"y":1}]
     let currentCoordinate = currentId.split("");
