@@ -8,6 +8,8 @@ This react app allows users attempt to complete the tour or view a solution to t
 
 In 2017 , I made (with a partner for a university course) a Pygame Python version of this game that allows the user set the dimensions of the chessboard and also provides a computer solution.
 
+Knight image from: http://clipart-library.com/clip-art/knight-chess-piece-silhouette-3.htm
+
 ## Install commands
 
 npm install @material-ui/core
