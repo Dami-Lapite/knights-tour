@@ -15,15 +15,19 @@ export class Square extends Component {
                 ):  <div className={styles.blackSquare} onClick={this.clickhandler}></div>
                 )):
                 (this.props.squareData.visited ? (
-                    <div className={styles.visitedSquare}>
-                    {this.props.isCurrent ? (
+                    (this.props.squareData.color == "white" ? (
+                    <div className={styles.whiteSquare} >
+                        {this.props.isCurrent ? (
                         <img src={ImSrc} width="50px" height="50px" alt="knight"/>
-                    ):null}
-                    </div>
-                ): (this.props.isLegal ? (
+                        ):<div><p className={styles.pathPosition}>{this.props.squareData.pathPos}</p></div>}
+                    </div>):<div className={styles.blackSquare} >
+                        {this.props.isCurrent ? (
+                        <img src={ImSrc} width="50px" height="50px" alt="knight"/>
+                        ):<div><p className={styles.pathPosition}>{this.props.squareData.pathPos}</p></div>}
+                    </div>)): 
+                (this.props.isLegal ? (
                     <div className={styles.legalSquare} onClick={this.clickhandler}></div>
-                )
-                :(this.props.squareData.color == "white" ? (
+                ):(this.props.squareData.color == "white" ? (
                     <div className={styles.whiteSquare} ></div>
                 ):  <div className={styles.blackSquare} ></div>
                 )))}

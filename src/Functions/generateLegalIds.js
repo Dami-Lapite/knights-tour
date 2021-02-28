@@ -1,6 +1,6 @@
-import isOnBoard from "./isOnBoard";
+import isOnBoard from './isOnBoard';
 
-function generateLegalMoves(currentId) {
+function generateLegalIds(currentId) {
     const moveOffsets = [{"x":-1,"y":-2},{"x":-1,"y":2},{"x":1,"y":-2},{"x":-2,"y":-1},{"x":-2,"y":1},{"x":2,"y":-1},{"x":1,"y":2},{"x":2,"y":1}]
     let currentCoordinate = currentId.split("");
     let currentI = +currentCoordinate[0];
@@ -12,10 +12,10 @@ function generateLegalMoves(currentId) {
         newX = currentI + offset.x;
         newY = currentJ + offset.y;
         if (isOnBoard(newX) && isOnBoard(newY)){
-            results.push({"x":newX, "y":newY})
+            results.push({"id": String(newX)+String(newY)})
         }
     }
     return (results);
 }
 
-export default generateLegalMoves;
+export default generateLegalIds

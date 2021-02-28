@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
+import Button from '@material-ui/core/Button';
 import Square from './Components/Square';
 import isLegalMove from './Functions/isLegalMove';
 import generateLegalMoves from './Functions/generateLegalMoves';
+import getKnightTour from './Functions/getKnightTour';
 import './App.css';
 
 class App extends Component {
@@ -14,6 +16,7 @@ class App extends Component {
       isLoaded: false,
       squares: [],
       currentSquareId: "",
+      knightPathPos: 1,
       knightPath: []
     };
   }
@@ -22,12 +25,37 @@ class App extends Component {
     return(this.state.currentSquareId == "");
   }
 
+  isSecondMove = () =>{
+    return(this.state.knightPathPos == 2);
+  }
+
   isCurrentSquare = (squareID) =>{
-    if(squareID == this.state.currentSquareId){
-      return true;
-    }else{
-      return false;
+    return(squareID == this.state.currentSquareId);
+  }
+
+  computerMode = () =>{
+    let path = [];
+    let visited = new Array(64); 
+    for (let i=0; i<64; ++i) visited[i] = 0;
+    let tour = getKnightTour(this.state.currentSquareId,path,visited).path;
+    let count = 1;
+    for (var squareID of tour) {
+      if(this.state.currentSquareId != squareID){
+        this.completePath(squareID, count);
+      }
+      count+=1;
     }
+    this.setState({currentSquareId: tour[63], knightPathPos: 65});
+  }
+
+  completePath = (squareID,count) =>{
+    let currentSquare = this.state.squares.find(currentSquare => currentSquare.id == squareID);
+    currentSquare.visited = true;
+    currentSquare.pathPos = count;
+  }
+
+  isPathComplete = () =>{
+    return(this.state.knightPathPos > 64);
   }
 
   anyLegalMoves = () =>{
@@ -42,18 +70,23 @@ class App extends Component {
           break;
         }
       }
-      if(!foundUnvisited){
-        return("Trapped !")
-      }
+      return(foundUnvisited);
+    }else{
+      return true;
     }
   }
 
   setCurrentSquare = (currentId) =>{
     this.setState({currentSquareId: currentId});
-    var tempArray = this.state.knightPath.concat(currentId);
-    this.setState({knightPath: tempArray});
     let currentSquare = this.state.squares.find(currentSquare => currentSquare.id == currentId);
     currentSquare.visited = true;
+    currentSquare.pathPos = this.state.knightPathPos;
+    let temp = this.state.knightPathPos + 1;
+    this.setState({knightPathPos: temp});
+  }
+
+  reloadPage = () =>{
+    window.location.reload();
   }
 
   componentDidMount(){
@@ -79,8 +112,25 @@ class App extends Component {
       <div className="App">
         <div className="container">
           <Grid container>
-            <Grid item xs={5} alignItems="center" style={{justifyContent:"center"}}>
-              <h3>{this.anyLegalMoves()}</h3>
+            <Grid item xs={5}>
+              <Card className="Card">
+                <div>
+                  {this.isPathComplete() ? (<div>
+                    <h1 className="cardHeader">Knight's Tour Complete !</h1>
+                  </div>):(
+                  this.anyLegalMoves() ? <div>
+                    <h1 className="cardHeader">The Knight's Tour</h1>
+                    <p className="cardText">The aim of the game is use the chess Knight's movements to visit each square on the board exactly once.</p>
+                    <p className="cardText">(Select starting square to enable computer mode.)</p>
+                  </div>:<div>
+                  <h1 className="cardHeader">Oops...you're trapped!</h1>
+                  </div>)}
+                  <div className="button"><Button variant="contained" onClick={this.reloadPage}>Start Again</Button></div>
+                  {this.isSecondMove() ? (
+                    <div className="button"><Button variant="contained" onClick={this.computerMode}>Computer Mode</Button></div>
+                  ):<div className="button"><Button variant="contained" disabled>Computer Mode</Button></div>}
+                </div>
+              </Card>
             </Grid>
             <Grid container className="Board" style={{ width: 756, height: 760}} spacing={0}>
             {this.state.squares.map((square) => (
