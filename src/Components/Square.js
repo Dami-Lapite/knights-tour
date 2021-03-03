@@ -12,25 +12,27 @@ export class Square extends Component {
     render() {
         return (
             <div>
-                {this.props.isInitial ? (
-                    (this.props.squareData.color == "white" ? (
+                {this.props.squareProps.isInitial ? (
+                    (this.props.squareData.color === "white" ? (
                     <div className={styles.whiteSquare} onClick={this.clickhandler}></div>
                 ):  <div className={styles.blackSquare} onClick={this.clickhandler}></div>
                 )):
                 (this.props.squareData.visited ? (
-                    (this.props.squareData.color == "white" ? (
+                    (this.props.squareData.color === "white" ? (
                     <div className={styles.whiteSquare} >
-                        {this.props.isCurrent ? (
+                        {this.props.squareProps.isCurrent ? (
                         <img src={ImSrc} width="50px" height="50px" alt="knight"/>
                         ):<div><p className={styles.pathPosition}>{this.props.squareData.pathPos}</p></div>}
                     </div>):<div className={styles.blackSquare} >
-                        {this.props.isCurrent ? (
+                        {this.props.squareProps.isCurrent ? (
                         <img src={ImSrc} width="50px" height="50px" alt="knight"/>
                         ):<div><p className={styles.pathPosition}>{this.props.squareData.pathPos}</p></div>}
                     </div>)): 
                 (this.props.isLegal ? (
-                    <div className={styles.legalSquare} onClick={this.clickhandler}></div>
-                ):(this.props.squareData.color == "white" ? (
+                    this.props.squareProps.isEnabled ? (
+                        <div className={styles.legalSquare} onClick={this.clickhandler}></div>
+                    ):(<div className={styles.legalSquare}></div>)
+                ):(this.props.squareData.color === "white" ? (
                     <div className={styles.whiteSquare} ></div>
                 ):  <div className={styles.blackSquare} ></div>
                 )))}

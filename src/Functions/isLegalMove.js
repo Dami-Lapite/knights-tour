@@ -7,7 +7,7 @@ function isLegalMove(i,j,currentId) {
     let currentJ = +currentCoordinate[1];
     var isLegal = false
     for (var offset  of moveOffsets) {
-        if ((i == currentI + offset.x) && (j == currentJ + offset.y)){
+        if ((i === currentI + offset.x) && (j === currentJ + offset.y)){
             isLegal = true;
             break;
         }

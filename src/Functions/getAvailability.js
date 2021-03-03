@@ -9,7 +9,7 @@ function getAvailability(id,visited) {
         let Coordinate = neighbour.id.split("");
         let i = +Coordinate[0];
         let j = +Coordinate[1];
-        if (visited[(8*i) + j] == 0){
+        if (visited[(8*i) + j] === 0){
             availability+=1;
         }
     }

@@ -24,7 +24,7 @@ function getKnightTour(currentId,path,visited) {
             let xyCoord = id.split("");
             let x = +xyCoord[0];
             let y = +xyCoord[1];
-            if (visited[(8*x)+y] == 0){
+            if (visited[(8*x)+y] === 0){
                 done = getKnightTour(id,path,visited).done
             }
             iter += 1;
