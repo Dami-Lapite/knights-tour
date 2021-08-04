@@ -36,7 +36,7 @@ class App extends Component {
     return(this.state.knightPathPos === 2);
   }
 
-  // Function: Checks if knight is on the square with squareID 
+  // Function: Checks if knight is on the square with squareID
   // Used by: Square Props to display knight image
   isCurrentSquare = (squareID) =>{
     return(squareID === this.state.currentSquareId);
@@ -46,7 +46,7 @@ class App extends Component {
   // Used by: Computer Mode Button when clicked
   computerMode = () =>{
     let path = [];
-    let visited = new Array(64); 
+    let visited = new Array(64);
     for (let i=0; i<64; ++i) visited[i] = 0;
     let tour = getKnightTour(this.state.currentSquareId,path,visited).path;
     this.setCurrentSquare(tour[1]);
@@ -185,9 +185,10 @@ class App extends Component {
               </Card>
               <div className="footer">
                 <p className="footerText">
-                <span><a className="fab fa-github" href="https://github.com/Dami-Lapite/knights-tour"></a></span>&emsp;
+                <span><a className="fab fa-github"
+                style={{display: "table-cell"}} href="https://github.com/Dami-Lapite/anime-quotes" target="_blank"></a></span>&emsp;
                 <span><a className="fas fa-external-link-alt project-icon"
-                                          href="https://www.damilapite.com/"></a></span>
+                style={{display: "table-cell"}} href="https://www.damilapite.com/" target="_blank"></a></span>
                 &emsp;Designed and Developed by Dami Lapite - 2021</p>
               </div>
             </Grid>
