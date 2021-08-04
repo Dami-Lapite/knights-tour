@@ -183,6 +183,13 @@ class App extends Component {
                   </div>}
                 </div>
               </Card>
+              <div className="footer">
+                <p className="footerText">
+                <span><a className="fab fa-github" href="https://github.com/Dami-Lapite/knights-tour"></a></span>&emsp;
+                <span><a className="fas fa-external-link-alt project-icon"
+                                          href="https://www.damilapite.com/"></a></span>
+                &emsp;Designed and Developed by Dami Lapite - 2021</p>
+              </div>
             </Grid>
             <Grid container className="Board" style={{ width: 756, height: 760}} spacing={0}>
             {this.state.squares.map((square) => (
