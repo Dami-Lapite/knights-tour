@@ -1,36 +1,92 @@
 .blackSquare{
-    width: 90px;
-    height: 90px;
-    border: 1;
-    border-style: solid;
-    background-color: rgb(163, 96, 19);
-    border-color: rgb(163, 96, 19);
+    width: 5.5em;
+    height: 5.5em;
+    margin: 0em;
+    background-color: #656d4a;
     display: flex;
+    -moz-align-items: center;
+    -webkit-align-items: center;
+    -ms-align-items: center;
     align-items: center;
+    align-items: center;
+    color: #000000;
     justify-content: center;   
 }
 
 .whiteSquare{
-    width: 90px;
-    height: 90px;
-    border: 1;
-    border-style: solid;
-    background-color: rgb(238, 189, 116);
-    border-color: rgb(239, 189, 116);   
+    width: 5.5em;
+    height: 5.5em;
+    margin: 0em ;
+    background-color: #c2c5aa;
     display: flex;
+    -moz-align-items: center;
+    -webkit-align-items: center;
+    -ms-align-items: center;
     align-items: center;
+    color: #000000;
     justify-content: center; 
 }
-
 .legalSquare{
-    width: 90px;
-    height: 90px;
-    border: 1;
-    border-style: solid;
+    width: 5.5em;
+    height: 5.5em;
+    display: flex;
+    margin: 0em;
     background-color: rgb(176, 231, 159);
-    border-color: rgb(176, 231, 159)  
+    -moz-align-items: center;
+    -webkit-align-items: center;
+    -ms-align-items: center;
+    align-items: center;
+    color: #000000;
+    justify-content: center;  
+}
+
+@media screen and (max-width: 1280px) {
+    .blackSquare {
+        max-width: calc((100%)/8);
+    }
+    .whiteSquare {
+        max-width: calc((100% - 6em)/8);
+    }
+}
+
+@media screen and (max-width: 980px) {
+
+    .blackSquare {
+        max-width: calc(100%);
+    }
+    .whiteSquare {
+        max-width: calc(100%);
+    }
+
+}
+
+@media screen and (max-width: 736px) {
+
+    .blackSquare {
+        flex-basis: 3em;
+    }
+    .whiteSquare {
+        flex-basis: 3em;
+    }
+    .legalSquare {
+        max-width: 3em;
+    }
+
+}
+
+@media screen and (max-width: 360px) {
+
+    .blackSquare {
+        max-width: calc(100%/8);
+    }
+    .whiteSquare {
+        max-width: calc(100%/8);
+    }
+
 }
 
 .pathPosition{
-    font: small-caps bold 25px Georgia, serif;
+    font-size: 2em;
+    font-weight: 400;
+    color: #000000;
 }

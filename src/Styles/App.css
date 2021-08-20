@@ -1,0 +1,102 @@
+*{
+  font-family: 'Montserrat', sans-serif;
+  color: #353535;
+}
+
+.App {
+    background-color: #ffffff;
+}
+
+.container {
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  -moz-align-items: center;
+  -webkit-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.Board{
+  border: 1;
+  border-style: solid;
+  border-color: #656d4a;
+  background-color: #c2c5aa;
+  border-radius: 0.25em;
+}
+
+/*Card*/
+.card{
+  width: fit-content;
+  max-width: 25em;
+  height: fit-content;
+  margin-left: 50px;
+  margin-top: 50px;
+  display: block;
+  -moz-align-items: center;
+  -webkit-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+  justify-content: center;
+  padding: 0em 1em;
+  border: 0;
+}
+
+.cardText{
+  font-size: 1.1em;
+  line-height: 1.5em;
+}
+
+.icon{
+  color: #ffffff;
+}
+
+.button{
+  display: block;
+  justify-content: center;
+  padding: 0.5em 1em;
+  margin: 1em auto;
+  background-color: #353535;
+  color: #ffffff;
+  font-size: 1.1em;
+  border: 0;
+  border-radius: 1.5em;
+}
+
+.disabled{
+  background-color: #cacaca;
+  color: #777777;
+}
+
+/*Footer*/
+.footer{
+  text-align: center;
+  width: 400px;
+  margin-left: 50px;
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+.footerText{
+	text-align: center;
+	font-size: 110%;
+	font-weight: 600;
+}
+a:link{
+  color: #353535;
+  text-decoration: none;
+}
+a:visited{
+  color: #353535;
+  text-decoration: none;
+}
+a:hover{
+  color: hotpink;
+}
+a:active{
+  color: hotpink;
+}

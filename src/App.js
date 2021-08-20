@@ -2,13 +2,11 @@
 
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import Button from '@material-ui/core/Button';
 import Square from './Components/Square';
 import isLegalMove from './Functions/isLegalMove';
 import generateLegalMoves from './Functions/generateLegalMoves';
 import getKnightTour from './Functions/getKnightTour';
-import './App.css';
+import './Styles/App.css';
 
 class App extends Component {
   constructor(props) {
@@ -20,7 +18,8 @@ class App extends Component {
       currentSquareId: "",
       knightPathPos: 1,
       stepMode: false,
-      tour: []
+      tour: [],
+      playerPath: [],
     };
   }
 
@@ -125,8 +124,25 @@ class App extends Component {
     currentSquare.visited = true;
     currentSquare.pathPos = this.state.knightPathPos;
     let temp = this.state.knightPathPos + 1;
-    this.setState({knightPathPos: temp});
-    console.log(this.state.knightPathPos, currentId);
+    let tempPath = this.state.playerPath;
+    tempPath.push(currentId);
+    this.setState({knightPathPos: temp, playerPath: tempPath});
+  }
+
+  isPlayerMode = ()=>{
+    return ((this.state.knightPathPos > 2) && !this.state.stepMode);
+  }
+
+  undoStep = ()=>{
+    let tempPath = this.state.playerPath;
+    let undoId = tempPath[tempPath.length - 1];
+    let undoSquare = this.state.squares.find(undoSquare => undoSquare.id === undoId);
+    undoSquare.visited = false;
+    undoSquare.pathPos = 0;
+    tempPath.pop();
+    let newId = tempPath[tempPath.length - 1];
+    let tempPos = this.state.knightPathPos - 1;
+    this.setState({currentSquareId: newId, knightPathPos: tempPos, playerPath: tempPath});
   }
 
   // Function: Restarts the game
@@ -161,28 +177,30 @@ class App extends Component {
         <div className="container">
           <Grid container>
             <Grid item xs={5}>
-              <Card className="Card">
-                <div>
-                  {this.isPathComplete() ? (<div>
-                    <h1 className="cardHeader">Knight's Tour Complete !</h1>
-                  </div>):(
-                  this.anyLegalMoves() ? <div>
-                    <h1 className="cardHeader">The Knight's Tour</h1>
-                    <p className="cardText">The aim of the game is to use the chess Knight's movements to visit each square on the board exactly once.</p>
-                    <p className="cardText">(Select starting square to enable computer mode.)</p>
-                  </div>:<div>
-                  <h1 className="cardHeader">Oops...you're trapped!</h1>
-                  </div>)}
-                  <div className="button"><Button variant="contained" onClick={this.reloadPage}>Re-Start</Button></div>
-                  {this.isSecondMove() ? (
-                    <div className="button"><Button variant="contained" onClick={this.computerMode}>Computer Mode</Button></div>
-                  ):<div className="button"><Button variant="contained" disabled>Computer Mode</Button></div>}
-                  {this.state.stepMode && <div className="button">
-                    <Button variant="contained" onClick={this.handleNext} style={{marginRight:"5px"}}>Next</Button>
-                    <Button variant="contained" onClick={this.handleSkip} style={{marginLeft:"5px"}}>Skip</Button>
-                  </div>}
-                </div>
-              </Card>
+              <div className="card">
+                {this.isPathComplete() ? (<div>
+                  <h1>Knight's Tour Complete !</h1>
+                </div>):(
+                this.anyLegalMoves() ? <div>
+                  <h1>The Knight's Tour</h1>
+                  <p className="cardText">The aim of the game is to use the chess Knight's movements to visit each square on the board exactly once.
+                  <br/>Begin by clicking on a square to select it.
+                  <br/>(Select starting square to enable computer mode.)</p>
+                </div>:<div>
+                <h1>Oops...you're trapped!</h1>
+                </div>)}
+                <button className="button" onClick={this.reloadPage}>Restart</button>
+                {this.isSecondMove() ? (
+                  <button className="button" onClick={this.computerMode}>Computer Mode</button>
+                ):<button className="button disabled">Computer Mode</button>}
+                {this.state.stepMode && <div>
+                  <button className="button" onClick={this.handleNext}>Next Step&emsp;<i className="fas fa-angle-right icon"></i></button>
+                  <button className="button" onClick={this.handleSkip}>Skip to Last Step&emsp;<i className="fas fa-fast-forward icon"></i></button>
+                </div>}
+                {this.isPlayerMode() && <div>
+                  <button className="button" onClick={this.undoStep}>Undo step&emsp;<i className="fas fa-undo-alt icon"></i></button>
+                </div>}
+              </div>
               <div className="footer">
                 <p className="footerText">
                 <span><a className="fab fa-github"
@@ -192,12 +210,12 @@ class App extends Component {
                 &emsp;Designed and Developed by Dami Lapite - 2021</p>
               </div>
             </Grid>
-            <Grid container className="Board" style={{ width: 756, height: 760}} spacing={0}>
+            <Grid container className="Board" style={{ width: "44.25em", height: "45em"}} spacing={0}>
             {this.state.squares.map((square) => (
               <Square key={square.id} isLegal={isLegalMove(square.i,square.j,this.state.currentSquareId)} squareProps={this.squareProps(square.id)} squareData={square} parentCallBack={this.setCurrentSquare}/>
             ))}
           </Grid>
-          </Grid>
+          </Grid>  
         </div>
       </div>
     );
