@@ -174,9 +174,8 @@ class App extends Component {
   render (){
     return (
       <div className="App">
+        <div className="wrapper">
         <div className="container">
-          <Grid container>
-            <Grid item xs={5}>
               <div className="card">
                 {this.isPathComplete() ? (<div>
                   <h1>Knight's Tour Complete !</h1>
@@ -187,7 +186,7 @@ class App extends Component {
                   <br/>Begin by clicking on a square to select it.
                   <br/>(Select starting square to enable computer mode.)</p>
                 </div>:<div>
-                <h1>Oops...you're trapped!</h1>
+                <h2>Oops...you're trapped!</h2>
                 </div>)}
                 <button className="button" onClick={this.reloadPage}>Restart</button>
                 {this.isSecondMove() ? (
@@ -201,22 +200,21 @@ class App extends Component {
                   <button className="button" onClick={this.undoStep}>Undo step&emsp;<i className="fas fa-undo-alt icon"></i></button>
                 </div>}
               </div>
-              <div className="footer">
-                <p className="footerText">
-                <span><a className="fab fa-github"
-                style={{display: "table-cell"}} href="https://github.com/Dami-Lapite/anime-quotes" target="_blank"></a></span>&emsp;
-                <span><a className="fas fa-external-link-alt project-icon"
-                style={{display: "table-cell"}} href="https://www.damilapite.com/" target="_blank"></a></span>
-                &emsp;Designed and Developed by Dami Lapite - 2021</p>
+              <div className="board">
+                  {this.state.squares.map((square) => (
+                <Square key={square.id} isLegal={isLegalMove(square.i,square.j,this.state.currentSquareId)} squareProps={this.squareProps(square.id)} squareData={square} parentCallBack={this.setCurrentSquare}/>
+              ))}
               </div>
-            </Grid>
-            <Grid container className="Board" style={{ width: "44.25em", height: "45em"}} spacing={0}>
-            {this.state.squares.map((square) => (
-              <Square key={square.id} isLegal={isLegalMove(square.i,square.j,this.state.currentSquareId)} squareProps={this.squareProps(square.id)} squareData={square} parentCallBack={this.setCurrentSquare}/>
-            ))}
-          </Grid>
-          </Grid>  
         </div>
+        <div className="footer">
+          <p className="footerText">
+          <span><a className="fab fa-github icon" 
+          style={{display: "table-cell"}} href="https://github.com/Dami-Lapite/anime-quotes" target="_blank"></a></span>&emsp;
+          <span><a className="fas fa-external-link-alt icon"
+          style={{display: "table-cell"}} href="https://www.damilapite.com/" target="_blank"></a></span>
+          &emsp;Designed & Developed by Dami Lapite - 2021</p>
+        </div>
+      </div>
       </div>
     );
   }

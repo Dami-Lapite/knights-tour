@@ -1,102 +1,139 @@
-*{
-  font-family: 'Montserrat', sans-serif;
+* {
+  font-family: "Montserrat", sans-serif;
   color: #353535;
 }
 
 .App {
-    background-color: #ffffff;
+  background-color: #f0f0f0;
+}
+
+@media screen and (max-width: 1680px) {
+  .App {
+    font-size: 13pt;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .App {
+    font-size: 12.5pt;
+  }
+}
+
+@media screen and (max-width: 736px) {
+  .App {
+    font-size: 12pt;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .App {
+    font-size: 11pt;
+  }
+}
+
+.wrapper {
+  position: relative;
 }
 
 .container {
-  display: -moz-flex;
-  display: -webkit-flex;
-  display: -ms-flex;
-  display: flex;
-  -moz-align-items: center;
-  -webkit-align-items: center;
-  -ms-align-items: center;
-  align-items: center;
-  height: 100vh;
+  display: grid;
+  grid-template-areas: "card board";
+  min-height: 100vh;
 }
 
-.Board{
+.board {
   border: 1;
+  margin: auto;
   border-style: solid;
   border-color: #656d4a;
   background-color: #c2c5aa;
   border-radius: 0.25em;
+  width: 40em;
+  height: 40em;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 1115px) {
+  .container {
+    display: block;
+    padding-bottom: 5em;
+  }
+}
+
+@media screen and (max-width: 736px) {
+  .board {
+    width: 96vw;
+    height: 96vw;
+  }
 }
 
 /*Card*/
-.card{
+.card {
   width: fit-content;
   max-width: 25em;
   height: fit-content;
-  margin-left: 50px;
-  margin-top: 50px;
+  margin: auto;
   display: block;
-  -moz-align-items: center;
-  -webkit-align-items: center;
-  -ms-align-items: center;
-  align-items: center;
-  justify-content: center;
-  padding: 0em 1em;
+  padding: 1em;
   border: 0;
 }
 
-.cardText{
-  font-size: 1.1em;
+.cardText {
+  font-size: 1em;
   line-height: 1.5em;
 }
 
-.icon{
+.icon {
   color: #ffffff;
 }
 
-.button{
+.button {
   display: block;
   justify-content: center;
   padding: 0.5em 1em;
-  margin: 1em auto;
+  margin: 0.5em auto;
   background-color: #353535;
   color: #ffffff;
-  font-size: 1.1em;
+  font-size: 1em;
   border: 0;
-  border-radius: 1.5em;
+  border-radius: 0.5em;
 }
 
-.disabled{
+.disabled {
   background-color: #cacaca;
   color: #777777;
 }
 
 /*Footer*/
-.footer{
+.footer {
+  position: absolute;
+  bottom: 0;
+  display: block;
+  width: 100%;
+  margin: 0.5em auto;
+}
+.footerText {
   text-align: center;
-  width: 400px;
-  margin-left: 50px;
-  margin-top: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
+  font-size: 100%;
+  color: #444444;
+  font-weight: 600;
 }
-.footerText{
-	text-align: center;
-	font-size: 110%;
-	font-weight: 600;
-}
-a:link{
+a:link {
   color: #353535;
   text-decoration: none;
 }
-a:visited{
+a:visited {
   color: #353535;
   text-decoration: none;
 }
-a:hover{
-  color: hotpink;
+a:hover {
+  color: #82a805;
 }
-a:active{
-  color: hotpink;
+a:active {
+  color: #82a805;
 }

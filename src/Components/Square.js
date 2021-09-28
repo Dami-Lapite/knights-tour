@@ -21,11 +21,11 @@ export class Square extends Component {
                     (this.props.squareData.color === "white" ? (
                     <div className={styles.whiteSquare} >
                         {this.props.squareProps.isCurrent ? (
-                        <img src={ImSrc} width="50px" height="50px" alt="knight"/>
+                        <img src={ImSrc}  alt="knight"/>
                         ):<div><p className={styles.pathPosition}>{this.props.squareData.pathPos}</p></div>}
                     </div>):<div className={styles.blackSquare} >
                         {this.props.squareProps.isCurrent ? (
-                        <img src={ImSrc} width="50px" height="50px" alt="knight"/>
+                        <img src={ImSrc}  alt="knight"/>
                         ):<div><p className={styles.pathPosition}>{this.props.squareData.pathPos}</p></div>}
                     </div>)): 
                 (this.props.isLegal ? (
