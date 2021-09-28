@@ -3,6 +3,9 @@
   height: 5em;
   margin: 0em;
   background-color: #656d4a;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: -ms-flex;
   display: flex;
   -moz-align-items: center;
   -webkit-align-items: center;
@@ -18,6 +21,9 @@
   height: 5em;
   margin: 0em;
   background-color: #c2c5aa;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: -ms-flex;
   display: flex;
   -moz-align-items: center;
   -webkit-align-items: center;
@@ -29,6 +35,9 @@
 .legalSquare {
   width: 5em;
   height: 5em;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: -ms-flex;
   display: flex;
   margin: 0em;
   background-color: rgb(176, 231, 159);
