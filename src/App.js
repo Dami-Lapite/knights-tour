@@ -184,7 +184,7 @@ class App extends Component {
                   <h1>The Knight's Tour</h1>
                   <p className="cardText">The aim of the game is to use the chess Knight's movements to visit each square on the board exactly once.
                   <br/>Begin by clicking on a square to select it.
-                  <br/>(Select starting square to enable computer mode.)</p>
+                  <br/>Computer mode generates a complete tour path based on the starting square.</p>
                 </div>:<div>
                 <h2>Oops...you're trapped!</h2>
                 </div>)}
