@@ -1,7 +1,6 @@
 // The Knight's Tour by Dami Lapite, Feb 2021
 
 import React, { Component } from 'react';
-import Grid from '@material-ui/core/Grid';
 import Square from './Components/Square';
 import isLegalMove from './Functions/isLegalMove';
 import generateLegalMoves from './Functions/generateLegalMoves';
