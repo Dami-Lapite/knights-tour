@@ -208,7 +208,7 @@ class App extends Component {
         <div className="footer">
           <p className="footerText">
           <span><a className="fab fa-github icon" 
-          style={{display: "table-cell"}} href="https://github.com/Dami-Lapite/anime-quotes" target="_blank"></a></span>&emsp;
+          style={{display: "table-cell"}} href="https://github.com/Dami-Lapite/knights-tour" target="_blank"></a></span>&emsp;
           <span><a className="fas fa-external-link-alt icon"
           style={{display: "table-cell"}} href="https://www.damilapite.com/" target="_blank"></a></span>
           &emsp;Designed & Developed by Dami Lapite - 2021</p>
