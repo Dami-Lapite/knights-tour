@@ -64,6 +64,7 @@
 
 #info-card .info-container .description {
   font-size: 1.05em;
+  line-height: 1.5em;
 }
 
 @media only screen and (max-width: 700px) {
@@ -101,11 +102,13 @@ button {
   background-color: #303030;
   font-size: 1.05em;
   font-weight: 500;
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
+  width: 180px;
   height: 40px;
   padding: 10px;
+  margin: 0.5em;
   color: #ffffff;
   border: 1px solid #303030;
   border-radius: 0.5em;
@@ -115,6 +118,18 @@ button {
   button {
     font-size: 1.2em;
   }
+}
+
+button.disabled {
+  background-color: #cacaca;
+  border-color: #cacaca;
+  color: #777777;
+}
+
+button:not(.disabled):hover {
+  font-size: 1.1em;
+  -webkit-box-shadow: 0 0 0.5em #303030;
+          box-shadow: 0 0 0.5em #303030;
 }
 
 #board {
@@ -169,11 +184,11 @@ button {
 }
 
 .square.white {
-  background-color: #c2c5aa;
+  background-color: #d0d2c2;
 }
 
 .square.black {
-  background-color: #656d4a;
+  background-color: #5f664a;
 }
 
 .square.highlight {

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import isLegalMove from "../Functions/isLegalMove";
+import getKnightTour from "../Functions/getKnightTour";
 import generateLegalIds from "../Functions/generateLegalIds";
 import { cloneDeep, isEmpty } from "lodash";
 import Square from "./Square";
@@ -56,7 +57,10 @@ class ChessBoard extends Component {
 
   handleClick = (id) => {
     if (this.isFirstMove()) {
-      this.props.showButtons();
+      this.props.handleFirstMove(id);
+    }
+    if (!this.props.computerMode && this.state.knightPathPosition === 2) {
+      this.props.disableComputerMode();
     }
     this.setCurrentSquare(id);
   };
@@ -73,6 +77,35 @@ class ChessBoard extends Component {
       };
     }
   };
+
+  setCompleteTour = (tourPath) => {
+    for (let i = 1; i < 64; ++i) {
+      let id = tourPath[i];
+      let square = this.state.squares.find((square) => square.id === id);
+      square.visited = true;
+      square.pathPosition = i + 1;
+      if (i === 63) {
+        this.setState({ currentSquareId: id, knightPathPosition: 64 });
+      }
+    }
+  };
+
+  componentDidUpdate(prevProps) {
+    if (this.props.computerMode !== prevProps.computerMode) {
+      if (this.props.computerMode) {
+        let path = [];
+        let visited = new Array(64);
+        for (let i = 0; i < 64; ++i) visited[i] = 0;
+        let completedTour = getKnightTour(
+          this.state.currentSquareId,
+          path,
+          visited
+        ).path;
+        this.setCompleteTour(completedTour);
+        this.props.disableComputerMode();
+      }
+    }
+  }
 
   componentDidMount() {
     this.setState({ squares: cloneDeep(this.props.boardData.squares) });

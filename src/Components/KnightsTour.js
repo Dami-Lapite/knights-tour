@@ -6,14 +6,31 @@ class KnightsTour extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showUserButtons: false,
       isGameOver: false,
       isTourComplete: false,
+      computerMode: false,
+      startingSquareId: null,
+      enableRestart: false,
+      enableComputerMode: false,
     };
   }
 
-  showButtons = () => {
-    this.setState({ showUserButtons: true });
+  disableComputerMode = () => {
+    this.setState({ enableComputerMode: false });
+  };
+
+  handleComputerMode = () => {
+    if (this.state.startingSquareId !== null && this.state.enableComputerMode) {
+      this.setState({ computerMode: true });
+    }
+  };
+
+  handleFirstMove = (squareId) => {
+    this.setState({
+      enableRestart: true,
+      enableComputerMode: true,
+      startingSquareId: squareId,
+    });
   };
 
   reloadPage = () => {
@@ -34,13 +51,20 @@ class KnightsTour extends Component {
               {this.props.content.infoCard.description}
             </p>
             <div className="button-container">
-              {this.state.showUserButtons && (
-                <div className="user-buttons">
-                  <button className="restart" onClick={this.reloadPage}>
-                    {this.props.content.infoCard.restartButton}
-                  </button>
-                </div>
-              )}
+              <button
+                className={`${
+                  !this.state.enableComputerMode ? "disabled" : ""
+                }`}
+                onClick={this.handleComputerMode}
+              >
+                {this.props.content.infoCard.computerModeButton}
+              </button>
+              <button
+                className={`${!this.state.enableRestart ? "disabled" : ""}`}
+                onClick={this.reloadPage}
+              >
+                {this.props.content.infoCard.restartButton}
+              </button>
             </div>
             {this.state.isGameOver && (
               <div className="tour-status">
@@ -56,7 +80,9 @@ class KnightsTour extends Component {
         <ChessBoard
           boardData={this.props.content.board}
           isTrapped={this.gameOver}
-          showButtons={this.showButtons}
+          handleFirstMove={this.handleFirstMove}
+          computerMode={this.state.computerMode}
+          disableComputerMode={this.disableComputerMode}
         />
       </div>
     );

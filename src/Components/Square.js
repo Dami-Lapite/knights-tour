@@ -13,7 +13,7 @@ export class Square extends Component {
       <div>
         <div
           className={`square ${this.props.squareData.color} ${
-            this.props.squareProps.highlighted && "highlight"
+            this.props.squareProps.highlighted ? "highlight" : ""
           }`}
           onClick={this.clickHandler}
         >

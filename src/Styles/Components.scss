@@ -35,6 +35,7 @@
     }
     .description {
       @include body-text;
+      line-height: 1.5em;
     }
     .tour-status {
       text-align: center;
@@ -57,12 +58,25 @@ button {
   background-color: $grey;
   @include body-text;
   @include medium-weight;
-  width: max-content;
+  min-width: max-content;
+  width: 180px;
   height: 40px;
   padding: 10px;
+  margin: 0.5em;
   color: #ffffff;
   border: 1px solid $grey;
   border-radius: 0.5em;
+  &.disabled {
+    background-color: $light_grey;
+    border-color: $light_grey;
+    color: $disabled_text;
+  }
+  &:not(.disabled) {
+    &:hover {
+      font-size: 1.1em;
+      box-shadow: 0 0 0.5em $grey;
+    }
+  }
 }
 
 #board {
