@@ -59,23 +59,27 @@ button {
   @include body-text;
   @include medium-weight;
   min-width: max-content;
-  width: 180px;
+  width: 200px;
   height: 40px;
   padding: 10px;
   margin: 0.5em;
   color: #ffffff;
   border: 1px solid $grey;
   border-radius: 0.5em;
+  &.restart:not(.disabled) {
+    background: url(../assets/images/icons8-restart-24.png) no-repeat 95% $grey;
+  }
+  &.undo:not(.disabled) {
+    background: url(../assets/images/icons8-undo-24.png) no-repeat 95% $grey;
+  }
   &.disabled {
     background-color: $light_grey;
     border-color: $light_grey;
     color: $disabled_text;
   }
-  &:not(.disabled) {
-    &:hover {
-      font-size: 1.1em;
-      box-shadow: 0 0 0.5em $grey;
-    }
+  &:hover:not(.disabled) {
+    font-size: 1.1em;
+    box-shadow: 0 0 0.5em $grey;
   }
 }
 

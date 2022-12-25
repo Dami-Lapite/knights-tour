@@ -105,7 +105,7 @@ button {
   min-width: -webkit-max-content;
   min-width: -moz-max-content;
   min-width: max-content;
-  width: 180px;
+  width: 200px;
   height: 40px;
   padding: 10px;
   margin: 0.5em;
@@ -120,13 +120,21 @@ button {
   }
 }
 
+button.restart:not(.disabled) {
+  background: url(../assets/images/icons8-restart-24.png) no-repeat 95% #303030;
+}
+
+button.undo:not(.disabled) {
+  background: url(../assets/images/icons8-undo-24.png) no-repeat 95% #303030;
+}
+
 button.disabled {
   background-color: #cacaca;
   border-color: #cacaca;
   color: #777777;
 }
 
-button:not(.disabled):hover {
+button:hover:not(.disabled) {
   font-size: 1.1em;
   -webkit-box-shadow: 0 0 0.5em #303030;
           box-shadow: 0 0 0.5em #303030;

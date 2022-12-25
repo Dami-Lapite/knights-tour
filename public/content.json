@@ -1,11 +1,12 @@
 {
   "title": "THE KNIGHT'S TOUR",
   "infoCard": {
-    "description": "The aim of the Knight's tour is to use the chess knight's L-shaped movements to visit each square on the chess board exactly once. Try completing the tour yourself or use Computer mode to generate a complete tour based on the starting square. Begin by clicking on a square to select it.",
+    "description": "The aim of the Knight's tour is to use the chess knight's L-shaped movements to visit each square on the chess board exactly once. Try completing the tour yourself or generate a complete tour based on the starting square. Begin by clicking on a square to select it.",
     "tourComplete": "You've completed the knight's tour!",
     "trapped": "You're trapped! Try again",
     "restartButton": "Restart",
-    "computerModeButton": "Computer Mode"
+    "computerModeButton": "Get Complete Tour",
+    "undoButton": "Undo"
   },
   "board": {
     "squares": [

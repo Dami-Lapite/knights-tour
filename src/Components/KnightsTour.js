@@ -12,11 +12,46 @@ class KnightsTour extends Component {
       startingSquareId: null,
       enableRestart: false,
       enableComputerMode: false,
+      enableUndo: false,
+      undoState: false,
+      restartState: false,
     };
   }
 
-  disableComputerMode = () => {
-    this.setState({ enableComputerMode: false });
+  disableUndo = () => {
+    this.setState({ enableUndo: false, enableComputerMode: true });
+  };
+
+  setUndoState = (state) => {
+    if (this.state.enableUndo) {
+      this.setState({ undoState: state });
+    }
+  };
+
+  handleReset = (state) => {
+    if (state) {
+      this.setState({
+        isGameOver: false,
+        isTourComplete: false,
+        computerMode: false,
+        startingSquareId: null,
+        enableRestart: false,
+        enableComputerMode: false,
+        enableUndo: false,
+        undoState: false,
+        restartState: true,
+      });
+    } else {
+      this.setState({ restartState: false });
+    }
+  };
+
+  handleSecondMove = (setBoth) => {
+    if (setBoth) {
+      this.setState({ enableUndo: true, enableComputerMode: false });
+    } else {
+      this.setState({ enableComputerMode: false });
+    }
   };
 
   handleComputerMode = () => {
@@ -33,12 +68,12 @@ class KnightsTour extends Component {
     });
   };
 
-  reloadPage = () => {
-    window.location.reload();
-  };
-
   gameOver = (isTourComplete) => {
-    this.setState({ isGameOver: true, isTourComplete: isTourComplete });
+    this.setState({
+      isGameOver: true,
+      isTourComplete: isTourComplete,
+      enableUndo: false,
+    });
   };
 
   render() {
@@ -52,7 +87,7 @@ class KnightsTour extends Component {
             </p>
             <div className="button-container">
               <button
-                className={`${
+                className={`computer-mode ${
                   !this.state.enableComputerMode ? "disabled" : ""
                 }`}
                 onClick={this.handleComputerMode}
@@ -60,10 +95,18 @@ class KnightsTour extends Component {
                 {this.props.content.infoCard.computerModeButton}
               </button>
               <button
-                className={`${!this.state.enableRestart ? "disabled" : ""}`}
-                onClick={this.reloadPage}
+                className={`restart ${
+                  !this.state.enableRestart ? "disabled" : ""
+                }`}
+                onClick={() => this.handleReset(true)}
               >
                 {this.props.content.infoCard.restartButton}
+              </button>
+              <button
+                className={`undo ${!this.state.enableUndo ? "disabled" : ""}`}
+                onClick={() => this.setUndoState(true)}
+              >
+                {this.props.content.infoCard.undoButton}
               </button>
             </div>
             {this.state.isGameOver && (
@@ -82,7 +125,12 @@ class KnightsTour extends Component {
           isTrapped={this.gameOver}
           handleFirstMove={this.handleFirstMove}
           computerMode={this.state.computerMode}
-          disableComputerMode={this.disableComputerMode}
+          handleSecondMove={this.handleSecondMove}
+          undoState={this.state.undoState}
+          resetUndo={() => this.setUndoState(false)}
+          disableUndo={this.disableUndo}
+          restartState={this.state.restartState}
+          resetRestart={() => this.handleReset(false)}
         />
       </div>
     );

@@ -60,7 +60,7 @@ class ChessBoard extends Component {
       this.props.handleFirstMove(id);
     }
     if (!this.props.computerMode && this.state.knightPathPosition === 2) {
-      this.props.disableComputerMode();
+      this.props.handleSecondMove(true);
     }
     this.setCurrentSquare(id);
   };
@@ -75,6 +75,31 @@ class ChessBoard extends Component {
           isLegalMove(square.i, square.j, this.state.currentSquareId),
         isCurrent: square.id === this.state.currentSquareId,
       };
+    }
+  };
+
+  handleUndo = () => {
+    if (this.state.knightPathPosition === 3) {
+      this.props.disableUndo();
+    }
+    if (this.state.knightPathPosition > 2) {
+      let currentSquare = this.state.squares.find(
+        (square) => square.id === this.state.currentSquareId
+      );
+      currentSquare.visited = false;
+      currentSquare.pathPosition = 0;
+      let knightPathPosition = this.state.knightPathPosition - 1;
+      let knightPath = cloneDeep(this.state.knightPath);
+      knightPath.pop();
+      let prevSquareId = knightPath[knightPath.length - 1];
+      this.setState(
+        {
+          currentSquareId: prevSquareId,
+          knightPathPosition: knightPathPosition,
+          knightPath: knightPath,
+        },
+        this.props.resetUndo
+      );
     }
   };
 
@@ -102,7 +127,25 @@ class ChessBoard extends Component {
           visited
         ).path;
         this.setCompleteTour(completedTour);
-        this.props.disableComputerMode();
+        this.props.handleSecondMove(false);
+      }
+    }
+    if (this.props.undoState !== prevProps.undoState) {
+      if (this.props.undoState) {
+        this.handleUndo();
+      }
+    }
+    if (this.props.restartState !== prevProps.restartState) {
+      if (this.props.restartState) {
+        this.setState(
+          {
+            currentSquareId: null,
+            squares: cloneDeep(this.props.boardData.squares),
+            knightPathPosition: 1,
+            knightPath: [],
+          },
+          this.props.resetRestart
+        );
       }
     }
   }
