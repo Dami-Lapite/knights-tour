@@ -14,7 +14,7 @@
   width: 100%;
 }
 
-@media screen and (max-width: 1170px) {
+@media screen and (max-width: 1335px) {
   #knights-tour {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -36,13 +36,7 @@
           align-items: center;
 }
 
-@media screen and (max-width: 1200px) {
-  #info-card {
-    width: 450px;
-  }
-}
-
-@media screen and (max-width: 1170px) {
+@media screen and (max-width: 1335px) {
   #info-card {
     width: 100%;
     margin: auto;
@@ -162,7 +156,7 @@ button:hover:not(.disabled) {
       flex-wrap: wrap;
 }
 
-@media screen and (max-width: 1170px) {
+@media screen and (max-width: 1335px) {
   #board {
     margin: auto;
   }
