@@ -1,0 +1,48 @@
+@import "fonts";
+@import "mixins";
+@import "variables";
+@import url(./Components.css);
+
+#App {
+  background-color: $white;
+  @include raleway-font;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  * {
+    overflow-wrap: break-word;
+  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  @media screen and (max-width: 1680px) {
+    font-size: 13pt;
+  }
+  @media screen and (max-width: 1280px) {
+    font-size: 12.5pt;
+  }
+  @media screen and (max-width: 736px) {
+    font-size: 12pt;
+  }
+  @media screen and (max-width: 360px) {
+    font-size: 11pt;
+  }
+}
+
+#footer {
+  flex-grow: 0;
+  margin: auto;
+  width: fit-content;
+  min-height: 2em;
+  padding: 10px;
+  @include small-icon;
+  .text-link {
+    @include hint-text;
+    margin: 5px 10px;
+    &:hover {
+      @include medium-weight;
+    }
+  }
+}

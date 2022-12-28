@@ -1,0 +1,20 @@
+@mixin raleway-font {
+  font-family: "Raleway", sans-serif;
+}
+
+@mixin teko-font {
+  font-family: "Teko", sans-serif;
+}
+
+@mixin medium-weight {
+  font-weight: 500;
+}
+
+@mixin heavy-weight {
+  font-weight: 600;
+}
+
+@mixin hint-text {
+  font-size: 0.9em;
+  color: $grey;
+}
