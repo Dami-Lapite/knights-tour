@@ -12,6 +12,7 @@
   overflow-y: scroll;
   * {
     overflow-wrap: break-word;
+    transition: 0.2s;
   }
   display: flex;
   flex-direction: column;
@@ -34,15 +35,31 @@
 #footer {
   flex-grow: 0;
   margin: auto;
-  width: fit-content;
+  width: 100%;
   min-height: 2em;
   padding: 10px;
-  @include small-icon;
-  .text-link {
-    @include hint-text;
-    margin: 5px 10px;
-    &:hover {
-      @include medium-weight;
+  .footer-item {
+    width: 100%;
+    margin: 10px auto;
+    display: flex;
+    justify-content: center;
+    align-content: space-around;
+    @include small-icon;
+    img {
+      &:hover {
+        @include highlight-filter;
+        translate: 0px -5px;
+      }
+    }
+    .text-link {
+      @include hint-text;
+      margin: 5px 10px;
+
+      &:hover {
+        color: $highlight;
+        @include medium-weight;
+        translate: 0px -5px;
+      }
     }
   }
 }

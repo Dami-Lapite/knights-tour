@@ -2,8 +2,12 @@
   font-family: "Raleway", sans-serif;
 }
 
-@mixin teko-font {
-  font-family: "Teko", sans-serif;
+@mixin exo {
+  font-family: "exo", sans-serif;
+}
+
+@mixin semi-medium-weight {
+  font-weight: 500;
 }
 
 @mixin medium-weight {

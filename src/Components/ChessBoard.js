@@ -14,6 +14,7 @@ class ChessBoard extends Component {
       squares: [],
       knightPathPosition: 1,
       knightPath: [],
+      completedTour: null,
     };
   }
 
@@ -71,6 +72,7 @@ class ChessBoard extends Component {
     } else {
       return {
         highlighted:
+          !this.props.computerMode &&
           !square.visited &&
           isLegalMove(square.i, square.j, this.state.currentSquareId),
         isCurrent: square.id === this.state.currentSquareId,
@@ -81,8 +83,10 @@ class ChessBoard extends Component {
   handleUndo = () => {
     if (this.state.knightPathPosition === 3) {
       this.props.disableUndo();
+      console.log("here");
     }
     if (this.state.knightPathPosition > 2) {
+      console.log("here 2");
       let currentSquare = this.state.squares.find(
         (square) => square.id === this.state.currentSquareId
       );
@@ -101,17 +105,26 @@ class ChessBoard extends Component {
         this.props.resetUndo
       );
     }
+    console.log("here 3");
   };
 
-  setCompleteTour = (tourPath) => {
-    for (let i = 1; i < 64; ++i) {
-      let id = tourPath[i];
+  stepThroughTour = () => {
+    let id = this.state.completedTour[this.state.knightPathPosition - 1];
+    this.setCurrentSquare(id);
+  };
+
+  setCompleteTour = () => {
+    console.log("here");
+    let i = this.state.knightPathPosition - 1;
+    while (i < 64) {
+      let id = this.state.completedTour[i];
       let square = this.state.squares.find((square) => square.id === id);
       square.visited = true;
       square.pathPosition = i + 1;
       if (i === 63) {
         this.setState({ currentSquareId: id, knightPathPosition: 64 });
       }
+      i++;
     }
   };
 
@@ -126,7 +139,22 @@ class ChessBoard extends Component {
           path,
           visited
         ).path;
-        this.setCompleteTour(completedTour);
+        this.setState(
+          {
+            completedTour,
+          },
+          this.stepThroughTour
+        );
+      }
+    }
+    if (this.props.stepThroughCount !== prevProps.stepThroughCount) {
+      if (this.props.computerMode) {
+        this.stepThroughTour();
+      }
+    }
+    if (this.props.stepThrough !== prevProps.stepThrough) {
+      if (this.props.computerMode && !this.props.stepThrough) {
+        this.setCompleteTour();
         this.props.handleSecondMove(false);
       }
     }
@@ -143,6 +171,7 @@ class ChessBoard extends Component {
             squares: cloneDeep(this.props.boardData.squares),
             knightPathPosition: 1,
             knightPath: [],
+            completedTour: null,
           },
           this.props.resetRestart
         );
