@@ -1,7 +1,7 @@
 // The Knight's Tour by Dami Lapite, Feb 2021
 
 import React, { Component } from "react";
-import KnightsTour from "./Components/KnightsTour";
+import KnightsTour from "./components/KnightsTour";
 import "./styles/App.css";
 import icons8 from "./assets/images/icons8-icons8-50.png";
 import github from "./assets/images/icons8-github-64.png";
