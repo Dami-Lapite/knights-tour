@@ -83,10 +83,8 @@ class ChessBoard extends Component {
   handleUndo = () => {
     if (this.state.knightPathPosition === 3) {
       this.props.disableUndo();
-      console.log("here");
     }
     if (this.state.knightPathPosition > 2) {
-      console.log("here 2");
       let currentSquare = this.state.squares.find(
         (square) => square.id === this.state.currentSquareId
       );
@@ -105,7 +103,6 @@ class ChessBoard extends Component {
         this.props.resetUndo
       );
     }
-    console.log("here 3");
   };
 
   stepThroughTour = () => {
@@ -114,7 +111,6 @@ class ChessBoard extends Component {
   };
 
   setCompleteTour = () => {
-    console.log("here");
     let i = this.state.knightPathPosition - 1;
     while (i < 64) {
       let id = this.state.completedTour[i];
