@@ -25,7 +25,6 @@ class KnightsTour extends Component {
   };
 
   setUndoState = (state) => {
-    console.log("eheh", state);
     this.setState({ undoState: state });
   };
 
@@ -90,6 +89,9 @@ class KnightsTour extends Component {
       isGameOver: true,
       isTourComplete: isTourComplete,
       enableUndo: false,
+      computerMode: false,
+      enableComputerMode: false,
+      stepThrough: false,
     });
   };
 
