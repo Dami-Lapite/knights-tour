@@ -12,6 +12,8 @@ class KnightsTour extends Component {
       startingSquareId: null,
       enableRestart: false,
       enableComputerMode: false,
+      stepThrough: false,
+      stepThroughCount: 0,
       enableUndo: false,
       undoState: false,
       restartState: false,
@@ -23,13 +25,16 @@ class KnightsTour extends Component {
   };
 
   setUndoState = (state) => {
-    if (this.state.enableUndo) {
-      this.setState({ undoState: state });
-    }
+    console.log("eheh", state);
+    this.setState({ undoState: state });
   };
 
   handleReset = (state) => {
     if (state) {
+      this.setState({
+        restartState: true,
+      });
+    } else {
       this.setState({
         isGameOver: false,
         isTourComplete: false,
@@ -37,12 +42,12 @@ class KnightsTour extends Component {
         startingSquareId: null,
         enableRestart: false,
         enableComputerMode: false,
+        stepThrough: false,
+        stepThroughCount: 0,
         enableUndo: false,
         undoState: false,
-        restartState: true,
+        restartState: false,
       });
-    } else {
-      this.setState({ restartState: false });
     }
   };
 
@@ -56,8 +61,20 @@ class KnightsTour extends Component {
 
   handleComputerMode = () => {
     if (this.state.startingSquareId !== null && this.state.enableComputerMode) {
-      this.setState({ computerMode: true });
+      this.setState({
+        computerMode: true,
+        stepThrough: true,
+      });
     }
+  };
+
+  handleStepThrough = () => {
+    let newCount = this.state.stepThroughCount + 1;
+    this.setState({ stepThroughCount: newCount });
+  };
+
+  handleSkipToEnd = () => {
+    this.setState({ stepThrough: false });
   };
 
   handleFirstMove = (squareId) => {
@@ -88,11 +105,19 @@ class KnightsTour extends Component {
             <div className="button-container">
               <button
                 className={`computer-mode ${
-                  !this.state.enableComputerMode ? "disabled" : ""
-                }`}
-                onClick={this.handleComputerMode}
+                  !this.state.enableComputerMode && !this.state.stepThrough
+                    ? "disabled"
+                    : ""
+                } ${this.state.stepThrough ? "step-through" : ""}`}
+                onClick={
+                  this.state.stepThrough
+                    ? this.handleStepThrough
+                    : this.handleComputerMode
+                }
               >
-                {this.props.content.infoCard.computerModeButton}
+                {this.state.stepThrough
+                  ? this.props.content.infoCard.nextButton
+                  : this.props.content.infoCard.computerModeButton}
               </button>
               <button
                 className={`restart ${
@@ -103,10 +128,20 @@ class KnightsTour extends Component {
                 {this.props.content.infoCard.restartButton}
               </button>
               <button
-                className={`undo ${!this.state.enableUndo ? "disabled" : ""}`}
-                onClick={() => this.setUndoState(true)}
+                className={`undo ${
+                  !this.state.enableUndo && !this.state.stepThrough
+                    ? "disabled"
+                    : ""
+                } ${this.state.stepThrough ? "step-through" : ""}`}
+                onClick={() =>
+                  this.state.stepThrough
+                    ? this.handleSkipToEnd()
+                    : this.setUndoState(true)
+                }
               >
-                {this.props.content.infoCard.undoButton}
+                {this.state.stepThrough
+                  ? this.props.content.infoCard.skipButton
+                  : this.props.content.infoCard.undoButton}
               </button>
             </div>
             {this.state.isGameOver && (
@@ -125,6 +160,8 @@ class KnightsTour extends Component {
           isTrapped={this.gameOver}
           handleFirstMove={this.handleFirstMove}
           computerMode={this.state.computerMode}
+          stepThrough={this.state.stepThrough}
+          stepThroughCount={this.state.stepThroughCount}
           handleSecondMove={this.handleSecondMove}
           undoState={this.state.undoState}
           resetUndo={() => this.setUndoState(false)}

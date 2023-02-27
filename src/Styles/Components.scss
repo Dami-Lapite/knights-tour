@@ -1,6 +1,7 @@
 @import "fonts";
 @import "mixins";
 @import "variables";
+@import "keyframes";
 
 #knights-tour {
   flex-grow: 1;
@@ -19,6 +20,7 @@
   margin: 1em;
   display: flex;
   align-items: center;
+  animation: 1s ease-out 0s 1 dropDown;
   @media screen and (max-width: 1335px) {
     width: 100%;
     margin: auto;
@@ -56,6 +58,7 @@ button {
   @include body-text;
   @include medium-weight;
   min-width: max-content;
+  @include exo;
   width: 200px;
   height: 40px;
   padding: 10px;
@@ -66,17 +69,43 @@ button {
   &.restart:not(.disabled) {
     background: url(../assets/images/icons8-restart-24.png) no-repeat 95% $grey;
   }
-  &.undo:not(.disabled) {
-    background: url(../assets/images/icons8-undo-24.png) no-repeat 95% $grey;
+  &.computer-mode.step-through {
+    background: url(../assets/images/icons8-end-single-24.png) no-repeat 95%
+      $grey;
   }
-  &.disabled {
+  &.undo:not(.disabled) {
+    &.step-through {
+      background: url(../assets/images/icons8-end-24.png) no-repeat 95% $grey;
+      &:hover {
+        font-size: 1.1em;
+        background-color: $highlight;
+        border-color: $highlight;
+        box-shadow: 0 0 0.5em $highlight;
+      }
+    }
+    &:not(.step-through) {
+      background: url(../assets/images/icons8-undo-24.png) no-repeat 95% $grey;
+      &:hover {
+        font-size: 1.1em;
+        background-color: $highlight;
+        border-color: $highlight;
+        box-shadow: 0 0 0.5em $highlight;
+      }
+    }
+  }
+  &.undo.disabled {
+    visibility: hidden;
+  }
+  &:not(.undo).disabled {
     background-color: $light_grey;
     border-color: $light_grey;
     color: $disabled_text;
   }
-  &:hover:not(.disabled) {
+  &:not(.disabled):hover {
     font-size: 1.1em;
-    box-shadow: 0 0 0.5em $grey;
+    background-color: $highlight;
+    border-color: $highlight;
+    box-shadow: 0 0 0.5em $highlight;
   }
 }
 
@@ -89,6 +118,7 @@ button {
   border-radius: 0.25em;
   width: 40em;
   height: 40em;
+  animation: 1s ease-out 0s 1 fadeInSlideUp;
   display: -moz-flex;
   display: -webkit-flex;
   display: -ms-flex;
@@ -120,6 +150,16 @@ button {
   }
   &.highlight {
     background-color: $highlight;
+    &:hover {
+      border: 2px solid rgb(244, 240, 240);
+      box-sizing: border-box;
+    }
+  }
+  &.clickable {
+    &:hover {
+      border: 2px solid rgb(244, 240, 240);
+      box-sizing: border-box;
+    }
   }
   img {
     width: 3em;
@@ -127,8 +167,9 @@ button {
   }
   p {
     font-size: 2em;
-    @include medium-weight;
+    @include semi-medium-weight;
     color: $charcoal;
+    @include exo;
   }
   @media screen and (max-width: 736px) {
     width: 12vw;

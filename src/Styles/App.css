@@ -23,6 +23,8 @@
 
 #App * {
   overflow-wrap: break-word;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
 }
 
 @media screen and (max-width: 1680px) {
@@ -54,26 +56,45 @@
       -ms-flex-positive: 0;
           flex-grow: 0;
   margin: auto;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
+  width: 100%;
   min-height: 2em;
   padding: 10px;
 }
 
-#footer img {
+#footer .footer-item {
+  width: 100%;
+  margin: 10px auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: distribute;
+      align-content: space-around;
+}
+
+#footer .footer-item img {
   width: 24px;
   height: 24px;
   margin: 0px 5px;
 }
 
-#footer .text-link {
+#footer .footer-item img:hover {
+  -webkit-filter: invert(58%) sepia(64%) saturate(418%) hue-rotate(45deg) brightness(95%) contrast(88%);
+          filter: invert(58%) sepia(64%) saturate(418%) hue-rotate(45deg) brightness(95%) contrast(88%);
+  translate: 0px -5px;
+}
+
+#footer .footer-item .text-link {
   font-size: 0.9em;
   color: #303030;
   margin: 5px 10px;
 }
 
-#footer .text-link:hover {
+#footer .footer-item .text-link:hover {
+  color: #7aaf3c;
   font-weight: 500;
+  translate: 0px -5px;
 }
 /*# sourceMappingURL=App.css.map */

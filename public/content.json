@@ -5,6 +5,8 @@
     "tourComplete": "You've completed the knight's tour!",
     "trapped": "You're trapped! Try again",
     "restartButton": "Restart",
+    "nextButton": "Next Step",
+    "skipButton": "Skip to End",
     "computerModeButton": "Get Complete Tour",
     "undoButton": "Undo"
   },
@@ -523,5 +525,8 @@
         "color": "black"
       }
     ]
+  },
+  "footer": {
+    "developer": "Dami Lapite - 2023"
   }
 }

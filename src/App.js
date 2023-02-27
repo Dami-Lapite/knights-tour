@@ -46,16 +46,26 @@ class App extends Component {
           <div id="App" className="App">
             <KnightsTour content={this.state.content} />
             <div className="footer" id="footer">
-              <a target="_blank" rel="noreferrer" href="https://icons8.com">
-                <img src={icons8} alt="icons8 logo" />
-              </a>
-              <a
-                target="_blank"
-                rel="noreferrer"
-                href="https://github.com/Dami-Lapite/knights-tour"
-              >
-                <img src={github} alt="github logo" />
-              </a>
+              <div className="footer-item">
+                <a
+                  className="text-link"
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://www.damilapite.com/"
+                >
+                  {this.state.content.footer.developer}
+                </a>
+                <a target="_blank" rel="noreferrer" href="https://icons8.com">
+                  <img src={icons8} alt="icons8 logo" />
+                </a>
+                <a
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://github.com/Dami-Lapite/knights-tour"
+                >
+                  <img src={github} alt="github logo" />
+                </a>
+              </div>
             </div>
           </div>
         ) : (
