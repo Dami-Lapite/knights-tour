@@ -98,79 +98,83 @@ class KnightsTour extends Component {
   render() {
     return (
       <div id="knights-tour" className="knights-tour">
-        <div id="info-card" className="info-card">
-          <div className="info-container">
-            <h3>{this.props.content.title}</h3>
-            <p className="description">
-              {this.props.content.infoCard.description}
-            </p>
-            <div className="button-container">
-              <button
-                className={`computer-mode ${
-                  !this.state.enableComputerMode && !this.state.stepThrough
-                    ? "disabled"
-                    : ""
-                } ${this.state.stepThrough ? "step-through" : ""}`}
-                onClick={
-                  this.state.stepThrough
-                    ? this.handleStepThrough
-                    : this.handleComputerMode
-                }
-              >
-                {this.state.stepThrough
-                  ? this.props.content.infoCard.nextButton
-                  : this.props.content.infoCard.computerModeButton}
-              </button>
-              <button
-                className={`restart ${
-                  !this.state.enableRestart ? "disabled" : ""
-                }`}
-                onClick={() => this.handleReset(true)}
-              >
-                {this.props.content.infoCard.restartButton}
-              </button>
-              <button
-                className={`undo ${
-                  !this.state.enableUndo && !this.state.stepThrough
-                    ? "disabled"
-                    : ""
-                } ${this.state.stepThrough ? "step-through" : ""}`}
-                onClick={() =>
-                  this.state.stepThrough
-                    ? this.handleSkipToEnd()
-                    : this.setUndoState(true)
-                }
-              >
-                {this.state.stepThrough
-                  ? this.props.content.infoCard.skipButton
-                  : this.props.content.infoCard.undoButton}
-              </button>
-            </div>
-            {this.state.isGameOver && (
-              <div className="tour-status">
-                {this.state.isTourComplete ? (
-                  <p>{this.props.content.infoCard.tourComplete}</p>
-                ) : (
-                  <p>{this.props.content.infoCard.trapped}</p>
-                )}
+        <div className="info-card-container">
+          <div id="info-card" className="info-card">
+            <div className="info-container">
+              <h3>{this.props.content.title}</h3>
+              <p className="description">
+                {this.props.content.infoCard.description}
+              </p>
+              <div className="button-container">
+                <button
+                  className={`computer-mode ${
+                    !this.state.enableComputerMode && !this.state.stepThrough
+                      ? "disabled"
+                      : ""
+                  } ${this.state.stepThrough ? "step-through" : ""}`}
+                  onClick={
+                    this.state.stepThrough
+                      ? this.handleStepThrough
+                      : this.handleComputerMode
+                  }
+                >
+                  {this.state.stepThrough
+                    ? this.props.content.infoCard.nextButton
+                    : this.props.content.infoCard.computerModeButton}
+                </button>
+                <button
+                  className={`restart ${
+                    !this.state.enableRestart ? "disabled" : ""
+                  }`}
+                  onClick={() => this.handleReset(true)}
+                >
+                  {this.props.content.infoCard.restartButton}
+                </button>
+                <button
+                  className={`undo ${
+                    !this.state.enableUndo && !this.state.stepThrough
+                      ? "disabled"
+                      : ""
+                  } ${this.state.stepThrough ? "step-through" : ""}`}
+                  onClick={() =>
+                    this.state.stepThrough
+                      ? this.handleSkipToEnd()
+                      : this.setUndoState(true)
+                  }
+                >
+                  {this.state.stepThrough
+                    ? this.props.content.infoCard.skipButton
+                    : this.props.content.infoCard.undoButton}
+                </button>
               </div>
-            )}
+              {this.state.isGameOver && (
+                <div className="tour-status">
+                  {this.state.isTourComplete ? (
+                    <p>{this.props.content.infoCard.tourComplete}</p>
+                  ) : (
+                    <p>{this.props.content.infoCard.trapped}</p>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
         </div>
-        <ChessBoard
-          boardData={this.props.content.board}
-          isTrapped={this.gameOver}
-          handleFirstMove={this.handleFirstMove}
-          computerMode={this.state.computerMode}
-          stepThrough={this.state.stepThrough}
-          stepThroughCount={this.state.stepThroughCount}
-          handleSecondMove={this.handleSecondMove}
-          undoState={this.state.undoState}
-          resetUndo={() => this.setUndoState(false)}
-          disableUndo={this.disableUndo}
-          restartState={this.state.restartState}
-          resetRestart={() => this.handleReset(false)}
-        />
+        <div className="chess-board-container">
+          <ChessBoard
+            boardData={this.props.content.board}
+            isTrapped={this.gameOver}
+            handleFirstMove={this.handleFirstMove}
+            computerMode={this.state.computerMode}
+            stepThrough={this.state.stepThrough}
+            stepThroughCount={this.state.stepThroughCount}
+            handleSecondMove={this.handleSecondMove}
+            undoState={this.state.undoState}
+            resetUndo={() => this.setUndoState(false)}
+            disableUndo={this.disableUndo}
+            restartState={this.state.restartState}
+            resetRestart={() => this.handleReset(false)}
+          />
+        </div>
       </div>
     );
   }
